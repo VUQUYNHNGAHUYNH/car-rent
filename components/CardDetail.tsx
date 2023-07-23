@@ -1,6 +1,7 @@
 "use client";
 
 import { CarProps } from "@/types";
+import { generateCarImageUrl } from "@/utils";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -32,7 +33,7 @@ const CardDetail = ({ isOpen, closeModal, car }: CardDetailProps) => {
                   <div className="flex gap-3">
                     <div className="relative flex-1 w-full h-24 bg-sky-50 rounded-lg">
                       <Image
-                        src="/hero.png"
+                        src={generateCarImageUrl(car, "43")}
                         fill
                         priority
                         className="object-contain"
@@ -41,7 +42,7 @@ const CardDetail = ({ isOpen, closeModal, car }: CardDetailProps) => {
                     </div>
                     <div className="relative flex-1 w-full h-24 bg-blue-50 rounded-lg">
                       <Image
-                        src="/hero.png"
+                        src={generateCarImageUrl(car, "29")}
                         fill
                         priority
                         className="object-contain"
@@ -50,7 +51,7 @@ const CardDetail = ({ isOpen, closeModal, car }: CardDetailProps) => {
                     </div>
                     <div className="relative flex-1 w-full h-24 bg-sky-50 rounded-lg">
                       <Image
-                        src="/hero.png"
+                        src={generateCarImageUrl(car, "13")}
                         fill
                         priority
                         className="object-contain"
