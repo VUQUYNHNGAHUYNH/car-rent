@@ -3,9 +3,10 @@ import CustomeFilter from "@/components/CustomeFilter";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import { fuels, yearsOfProduction } from "@/constants";
+import { HomeProps } from "@/types";
 import { fetchCars } from "@/utils";
 
-export default async function Home({ searchParams }) {
+export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer,
     year: searchParams.year,
@@ -14,7 +15,7 @@ export default async function Home({ searchParams }) {
     model: searchParams.model,
   });
 
-  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1;
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   return (
     <div className="overflow-hidden">
@@ -30,7 +31,7 @@ export default async function Home({ searchParams }) {
 
         <div className=" mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar />
-          <div className="flex justify-start flex-wrap items-center gap-2">
+          <div className="mt-4 flex justify-start flex-wrap items-center gap-2">
             <CustomeFilter title="fuel" options={fuels} />
             <CustomeFilter title="year" options={yearsOfProduction} />
           </div>
@@ -38,7 +39,10 @@ export default async function Home({ searchParams }) {
 
         {isDataEmpty ? (
           <>
-            <h2>Opps! No results </h2>
+            <h2 className="text-black text-xl font-bold text-center mt-4">
+              Opps! No results{" "}
+            </h2>
+            <p>{allCars?.message}</p>
           </>
         ) : (
           <section className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14">
