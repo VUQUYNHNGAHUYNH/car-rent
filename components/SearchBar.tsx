@@ -84,6 +84,7 @@ const SearchBar = () => {
           placeholder="Model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
+          className="w-full h-[48px] pl-2 p-4 rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm"
         />
         <button>
           <AiOutlineSearch

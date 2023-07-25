@@ -2,10 +2,17 @@ import CarCard from "@/components/CarCard";
 import CustomeFilter from "@/components/CustomeFilter";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
+import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 
-export default async function Home() {
-  const allCars = await fetchCars();
+export default async function Home({ searchParams }) {
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer,
+    year: searchParams.year,
+    fuel: searchParams.fuel,
+    limit: searchParams.limit,
+    model: searchParams.model,
+  });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1;
 
@@ -24,8 +31,8 @@ export default async function Home() {
         <div className=" mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar />
           <div className="flex justify-start flex-wrap items-center gap-2">
-            <CustomeFilter title="fuel" />
-            <CustomeFilter title="year" />
+            <CustomeFilter title="fuel" options={fuels} />
+            <CustomeFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
 
